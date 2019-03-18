@@ -80,7 +80,38 @@ function tolkien (person) {
     return jwt.sign(payload, secrets.jwtSecret, options);
 }
 
+softserver.get('/test', authenticate, (rec, rez) =>{
+    usersRegis()
+    .then(go => {
+        rez.send(go)
+    })
+    .catch(err => {
+        rez.send(err)
+    })
 
+})
+
+function usersRegis () {
+    return deebee('users')
+}
+
+function authenticate (req, res, next) {
+    const token = req.get('Authorization');
+
+    if (token) {
+        jwt.verify(token, secrets.jwtSecret, (err, decoded) => {
+            if (err) {return res.status(402).json(err)}
+            else {
+            req.decoded = decoded;
+            next();
+            }
+        })
+    } else {
+        return ( res.status(403).json({
+            error: "No Token Provided, must be in Authorization header on request",
+        }))
+    }
+}
 
 module.exports = softserver;
 
