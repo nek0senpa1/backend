@@ -12,7 +12,7 @@ const jwt = require ('jsonwebtoken');
 const deebee = require('../database/deebeeConfig')
 
 softserver.use(express.json());
-softserver.use(cors);
+//softserver.use(cors);
 
 //const { authenticate, jwtKey } = require('../auth/authenticate');
 
