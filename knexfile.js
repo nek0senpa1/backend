@@ -5,7 +5,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: '.database/databeeSSP.sqlite3'
+      filename: './database/databeeSSP.sqlite3'
     },
     useNullAsDefault: true,
   },

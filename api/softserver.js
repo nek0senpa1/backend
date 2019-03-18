@@ -1,4 +1,6 @@
-const router = require('express').Router();
+const express = require('express');
+
+const softserver = express();
 
 
 const axios = require('axios');
@@ -7,20 +9,22 @@ const jwt = require ('jsonwebtoken');
 
 const deebee = require('../database/deebeeConfig')
 
+softserver.use(express.json())
+
 //const { authenticate, jwtKey } = require('../auth/authenticate');
 
 
-router.post('/register', (req, res) => {
+softserver.post('/register', (req, res) => {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash;
   
-    Users.add(user)
+    addUser(user)
       .then(saved => {
         res.status(201).json(saved);
       })
       .catch(error => {
-        res.status(500).json(error);
+        res.status(500).json({message: 'user already exists'});
       });
   });
 
@@ -28,13 +32,15 @@ router.post('/register', (req, res) => {
 async function addUser (user) {
     const tom = await deebee('users').insert(user);
 
-    return findUser(user)
+    return (`New User: ${user.username} : Added :)`)
 } 
 
 function findUser (peep) {
     return deebee('users').select('id', 'username')
     .where({id: peep.id}).first();
 }
+
+module.exports = softserver;
 
 
 

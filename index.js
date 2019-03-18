@@ -4,6 +4,10 @@ const helmet = require('helmet');
 
 const server = express();
 
+const softserver = require('./api/softserver')
+
+server.use(softserver);
+
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
