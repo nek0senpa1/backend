@@ -25,6 +25,16 @@ router.post('/register', (req, res) => {
   });
 
 
+async function addUser (user) {
+    const tom = await deebee('users').insert(user);
+
+    return findUser(user)
+} 
+
+function findUser (peep) {
+    return deebee('users').select('id', 'username')
+    .where({id: peep.id}).first();
+}
 
 
 
@@ -39,27 +49,3 @@ router.post('/register', (req, res) => {
 
 
 
-
-function register(req, res) {
-    
-    const newb = req.body;
-    console.log(newb.password);
-    const hashtag = bcrypt.hashSync(newb.password, 12);
-    newb.password = hashtag;
-  
-    addstuff(newb)
-    .then(stuff => {
-      if(stuff){
-  
-      res.status(200).json({message:"Newb assigned:", stuff})
-      } else {
-        res.send('Something went wrong...')
-      }
-  
-    })
-    .catch(errorz => {
-      res.status(500).json({message: "username already registered..."});
-    })
-  
-  
-  }
