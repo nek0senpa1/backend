@@ -6,6 +6,7 @@
   "author": "amberm <nekosenpai@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "node index.js",
     "server": "nodemon index.js"
   },
   "dependencies": {

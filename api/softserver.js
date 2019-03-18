@@ -80,6 +80,9 @@ function tolkien (person) {
     return jwt.sign(payload, secrets.jwtSecret, options);
 }
 
+
+
+
 softserver.get('/test', authenticate, (rec, rez) =>{
     usersRegis()
     .then(go => {
@@ -112,6 +115,8 @@ function authenticate (req, res, next) {
         }))
     }
 }
+
+
 
 module.exports = softserver;
 
