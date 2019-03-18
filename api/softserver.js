@@ -118,6 +118,10 @@ function authenticate (req, res, next) {
 
 
 
+//softserver.get('/messages', authenticate, )
+
+
+
 module.exports = softserver;
 
 

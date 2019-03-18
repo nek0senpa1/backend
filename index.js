@@ -9,6 +9,7 @@ const server = express();
 const softserver = require('./api/softserver')
 
 server.use(softserver);
+server.use(cors);
 
 server.use(helmet());
 server.use(cors());
