@@ -52,7 +52,8 @@ softserver.post('/login', (req, rez) => {
 
             rez.status(201). json({
                 message: `Welcome ${user.username} !`,
-                token
+                token,
+                username: usernamey
             })
         } else {
             rez.status(401).json({message: `Invalid Information Entered`})
