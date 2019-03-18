@@ -2,6 +2,7 @@ const express = require('express');
 
 const softserver = express();
 
+const secrets = require('./secret');
 
 const axios = require('axios');
 const bcrypt = require ('bcryptjs');
@@ -44,8 +45,12 @@ softserver.post('/login', (req, rez) => {
     findEm({username: usernamey}).first()
     .then(user => {
         if(bcrypt.compareSync(passwordy, user.password)) {
+
+            const token = tolkien(user)
+
             rez.status(201). json({
-                message: `Welcome ${user.username} !`
+                message: `Welcome ${user.username} !`,
+                token
             })
         } else {
             rez.status(401).json({message: `Invalid Information Entered`})
@@ -61,6 +66,19 @@ function findEm (peep) {
     return deebee('users').where(peep)
 }
 
+function tolkien (person) {
+    console.log('getting here...')
+    const payload = {
+        subject: person.id,
+        username: person.username,
+        
+    };
+    const options = {
+        expiresIn: '1d',
+    }
+
+    return jwt.sign(payload, secrets.jwtSecret, options);
+}
 
 
 
