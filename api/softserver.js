@@ -35,10 +35,34 @@ async function addUser (user) {
     return (`New User: ${user.username} : Added :)`)
 } 
 
-function findUser (peep) {
-    return deebee('users').select('id', 'username')
-    .where({id: peep.id}).first();
+
+
+softserver.post('/login', (req, rez) => {
+    let usernamey = req.body.username;
+    let passwordy = req.body.password;
+
+    findEm({username: usernamey}).first()
+    .then(user => {
+        if(bcrypt.compareSync(passwordy, user.password)) {
+            rez.status(201). json({
+                message: `Welcome ${user.username} !`
+            })
+        } else {
+            rez.status(401).json({message: `Invalid Information Entered`})
+        }
+    })
+    .catch(errerz => {
+        rez.status(500).json({message: 'something went really really wrong here...'})
+    })
+})
+
+
+function findEm (peep) {
+    return deebee('users').where(peep)
 }
+
+
+
 
 module.exports = softserver;
 
