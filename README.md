@@ -15,3 +15,10 @@ back end for safe space group app
 | Endpoint | Description |
 | --- | --- |
 | '/messages' | Displays all current messages attatched to the user id |
+
+# Generic Login info:
+
+| Login | Password |
+| --- | --- |
+| user | pass |
+| Harry10 | Potter |

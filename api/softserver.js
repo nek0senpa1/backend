@@ -102,6 +102,9 @@ function usersRegis () {
     return deebee('users')
 }
 
+
+
+
 function authenticate (req, res, next) {
     const token = req.get('Authorization');
 
@@ -120,6 +123,7 @@ function authenticate (req, res, next) {
         }))
     }
 }
+
 
 
 
