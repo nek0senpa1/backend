@@ -14,6 +14,7 @@ back end for safe space group app
 
 | Endpoint | Description |
 | --- | --- |
+| '/addmessage' | allows the adding of messages with { message: xxxx xxx xxxx xxxxxx } format |
 | '/messages' | Displays all current messages attatched to the user id |
 
 # Generic Login info:
@@ -22,3 +23,8 @@ back end for safe space group app
 | --- | --- |
 | user | pass |
 | Harry10 | Potter |
+
+# Heroku does... things
+It appears as though HerokuApp does some strange things with servers sometimes.  New users
+will disappear every 4-6 hours it seems.  But anything seeded will stay permanently.  So if
+there is data you want to be there no matter what (for a pre-existing user) let me know.
