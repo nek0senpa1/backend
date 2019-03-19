@@ -20,7 +20,5 @@ server.listen(port, () => {
   console.log(`Hello World Sphere. I'm Running on Port ${port}. Consumption is being standardized.`);
 });
 
-server.get('/', (req, res) => {
-    res.send("For more enjoyment and greater efficiency, consumption is being standardized.");
-  });
+
   

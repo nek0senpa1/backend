@@ -16,6 +16,10 @@ softserver.use(express.json());
 
 //const { authenticate, jwtKey } = require('../auth/authenticate');
 
+softserver.get('/', (req, res) => {
+    res.send("For more enjoyment and greater efficiency, consumption is being standardized.");
+  });
+
 
 softserver.post('/register', (req, res) => {
     let user = req.body;
@@ -113,7 +117,7 @@ function authenticate (req, res, next) {
             if (err) {return res.status(402).json(err)}
             else {
             req.decoded = decoded;
-            console.log(req.decoded)
+            //console.log(req.decoded)
             next();
             }
         })
@@ -146,6 +150,34 @@ function filteroo(peep) {
     .where({from: peep.subject})
 
 }
+
+
+
+
+
+softserver.post('/addmessage', authenticate, (req, res) => {
+    
+    let post = {
+        message: req.body.message,
+        from: req.decoded.subject
+    }
+
+  
+    addPost(post)
+      .then(saved => {
+        res.status(201).json(saved);
+      })
+      .catch(error => {
+        res.status(503).json({message: 'Something is wrong... somewhere...'});
+      });
+  });
+
+
+async function addPost (post) {
+    const sally = await deebee('texts').insert(post);
+
+    return (`New Post: ${post.message} : Added :)`)
+} 
 
 
 module.exports = softserver;
