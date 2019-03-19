@@ -173,6 +173,7 @@ softserver.post('/addmessage', authenticate, (req, res) => {
         .then(saved => {
         res.status(201).json(saved);
         
+        
         sendIt(req.body.message, phoney)
 
       })
