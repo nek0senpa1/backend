@@ -71,7 +71,7 @@ function findEm (peep) {
 }
 
 function tolkien (person) {
-    console.log('getting here...')
+    console.log('getting token here...')
     const payload = {
         subject: person.id,
         username: person.username,
@@ -110,6 +110,7 @@ function authenticate (req, res, next) {
             if (err) {return res.status(402).json(err)}
             else {
             req.decoded = decoded;
+            console.log(req.decoded)
             next();
             }
         })
@@ -122,8 +123,25 @@ function authenticate (req, res, next) {
 
 
 
-//softserver.get('/messages', authenticate, )
+softserver.get('/messages', authenticate, (req, res) => {
+    let bean = req.decoded;
+    console.log('In messages area: ', bean)
+    
+    filteroo(bean)
+    .then(stuff =>{
+        res.status(202).send(stuff);
+    })
+    .catch(err => {
+        rez.send(err)
+    })
+} )
 
+
+function filteroo(peep) {
+    return deebee('texts').select('message')
+    .where({from: peep.subject})
+
+}
 
 
 module.exports = softserver;
