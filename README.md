@@ -15,7 +15,8 @@ back end for safe space group app
 | Endpoint | Description |
 | --- | --- |
 | '/addmessage' | allows the adding of messages with { message: xxxx xxx xxxx xxxxxx } format |
-| '/messages' | Displays all current messages attatched to the user id |
+| '/messages' | Displays all current messages attatched to the user id, with message id |
+| '/deletemessages/:id' | Deletes the message with the ID number sent |
 
 # Generic Login info:
 

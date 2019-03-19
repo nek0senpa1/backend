@@ -148,7 +148,7 @@ softserver.get('/messages', authenticate, (req, res) => {
 
 
 function filteroo(peep) {
-    return deebee('texts').select('message')
+    return deebee('texts').select('message', 'id')
     .where({from: peep.subject})
 
 }
@@ -173,7 +173,7 @@ softserver.post('/addmessage', authenticate, (req, res) => {
         .then(saved => {
         res.status(201).json(saved);
         
-        
+
         sendIt(req.body.message, phoney)
 
       })
@@ -183,10 +183,6 @@ softserver.post('/addmessage', authenticate, (req, res) => {
     }).catch(error => {
         res.status(504).json({message: 'Something is REALLY wrong... somewhere...'});
       });
-
-    
-
-  
     
   });
 
@@ -198,9 +194,6 @@ async function addPost (post) {
         `New Post: ${post.message} : Added :)`
         )
 } 
-
-
-
 
 
 function sendIt(message, phone) {
@@ -217,6 +210,30 @@ function sendIt(message, phone) {
     .then(message => console.log(message.sid));
 
 }
+
+
+
+
+softserver.delete('/deletemessage/:id', authenticate, (rec,rez) => {
+
+    let randomthing = rec.params.id;
+
+    deebee('texts').where({id: randomthing}).del()
+    .then(itsgone => {
+        if(!itsgone){
+            rez.send('Nope... that text doesn\'t exist')
+        }
+        else {
+            rez.status(404).json({message: 'Yup... you have deleted that text'})
+        }
+    })
+    .catch( err => {
+        rez.status(500).json(
+          { err, message: 'Failed.  You tried something and it went really really wrong...'}
+        )
+      })
+
+})
 
 
 
