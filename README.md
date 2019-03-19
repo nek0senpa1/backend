@@ -28,3 +28,7 @@ back end for safe space group app
 It appears as though HerokuApp does some strange things with servers sometimes.  New users
 will disappear every 4-6 hours it seems.  But anything seeded will stay permanently.  So if
 there is data you want to be there no matter what (for a pre-existing user) let me know.
+
+# Twilio Facts
+The text message portion does NOT work with the server UNLESS you've verified with
+the trial account ID, which I'll have to do.

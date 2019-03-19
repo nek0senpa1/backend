@@ -3,6 +3,8 @@ const cors = require('cors');
 
 const softserver = express();
 
+require('dotenv').config();
+
 const secrets = require('./secret');
 
 const axios = require('axios');
@@ -57,7 +59,7 @@ softserver.post('/login', (req, rez) => {
             rez.status(201). json({
                 message: `Welcome ${user.username} !`,
                 token,
-                userwidget: user.username
+                
                 
             })
         } else {
@@ -103,7 +105,7 @@ softserver.get('/test', authenticate, (rec, rez) =>{
 })
 
 function usersRegis () {
-    return deebee('users')
+    return deebee('users').select('username', 'password')
 }
 
 
@@ -162,22 +164,59 @@ softserver.post('/addmessage', authenticate, (req, res) => {
         from: req.decoded.subject
     }
 
-  
-    addPost(post)
-      .then(saved => {
+    findEm({username: req.decoded.username}).first()
+    .then(stuff => {
+        let phoney = stuff.phone;
+        console.log('Phoney:', phoney);
+
+        addPost(post)
+        .then(saved => {
         res.status(201).json(saved);
+        
+        sendIt(req.body.message, phoney)
+
       })
       .catch(error => {
         res.status(503).json({message: 'Something is wrong... somewhere...'});
       });
+    }).catch(error => {
+        res.status(504).json({message: 'Something is REALLY wrong... somewhere...'});
+      });
+
+    
+
+  
+    
   });
 
 
 async function addPost (post) {
     const sally = await deebee('texts').insert(post);
 
-    return (`New Post: ${post.message} : Added :)`)
+    return (
+        `New Post: ${post.message} : Added :)`
+        )
 } 
+
+
+
+
+
+function sendIt(message, phone) {
+    
+    const authToken = 'b212e9259ed1ae5e51ba9d79f9333fc2';
+    const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, authToken);
+
+    client.messages
+    .create({
+        body: `Message: ${message}`,
+        from: '+12568587107',
+        to: `+1${phone}`
+    })
+    .then(message => console.log(message.sid));
+
+}
+
 
 
 module.exports = softserver;
