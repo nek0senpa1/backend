@@ -10,4 +10,8 @@ back end for safe space group app
 | '/login' | login with { username: xxx, password: xxx } and you'll get a welcome message and token |
 | '/test' | displays a list of registered users IF login and auth token are present |
 
-# That's all for now folks
+# Once logged in and you've pushed to jwt to headers
+
+| Endpoint | Description |
+| --- | --- |
+| '/messages' | Displays all current messages attatched to the user id |
