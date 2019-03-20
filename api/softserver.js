@@ -142,7 +142,7 @@ softserver.get('/messages', authenticate, (req, res) => {
         res.status(202).send(stuff);
     })
     .catch(err => {
-        rez.send(err)
+        rez.status(402).json('error:', err, 'No Authorization!')
     })
 } )
 
