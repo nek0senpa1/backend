@@ -130,10 +130,30 @@ function authenticate (req, res, next) {
     }
 }
 
+function authenticate2 (req,res, next) {
+    const token = localStorage.getItem('jwt');
+
+    if (token) {
+        jwt.verify(token, secrets.jwtSecret, (err, decoded) => {
+            if (err) {return res.status(402).json(err)}
+            else {
+            req.decoded = decoded;
+            //console.log(req.decoded)
+            next();
+            }
+        })
+    } else {
+        return ( res.status(403).json({
+            error: "No Token Provided, must be in Authorization header on request",
+        }))
+    }
+}
+}
 
 
 
-softserver.get('/messages', authenticate, (req, res) => {
+
+softserver.get('/messages', authenticate2, (req, res) => {
     let bean = req.decoded;
     console.log('In messages area: ', bean)
     
