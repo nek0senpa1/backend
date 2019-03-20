@@ -153,7 +153,7 @@ function authenticate2 (req,res, next) {
 
 
 
-softserver.get('/messages', authenticate2, (req, res) => {
+softserver.get('/messages', authenticate, (req, res) => {
     let bean = req.decoded;
     console.log('In messages area: ', bean)
     
