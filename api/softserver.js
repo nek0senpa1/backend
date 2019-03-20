@@ -173,8 +173,12 @@ softserver.post('/addmessage', authenticate, (req, res) => {
         .then(saved => {
         res.status(201).json(saved);
         
+        setTimeout(
+            function bombadil() {
 
-        sendIt(req.body.message, phoney)
+                sendIt(req.body.message, phoney)
+
+            }, 20000)
 
       })
       .catch(error => {
