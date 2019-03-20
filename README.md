@@ -15,6 +15,7 @@ back end for safe space group app
 | Endpoint | Description |
 | --- | --- |
 | '/addmessage' | allows the adding of messages with { message: xxxx xxx xxxx xxxxxx } format |
+| '/addmessage' | ALTERNATE - ADD a timer { message: xxxx xxx xxxx xxxxxx, timer: [milliseconds] } send a number, or don't, if you want default of 30 seconds, don't send a timer, if you want a specific delay on the message send in milliseconds  |
 | '/messages' | Displays all current messages attatched to the user id, with message id |
 | '/deletemessages/:id' | Deletes the message with the ID number sent |
 

@@ -163,6 +163,7 @@ softserver.post('/addmessage', authenticate, (req, res) => {
         message: req.body.message,
         from: req.decoded.subject
     }
+    let timer = req.body.timer;
 
     findEm({username: req.decoded.username}).first()
     .then(stuff => {
@@ -178,7 +179,7 @@ softserver.post('/addmessage', authenticate, (req, res) => {
                 if ( stuff ) {
                 sendIt(req.body.message, phoney)
                 }
-            }, 30000)
+            }, timer || 30000)
 
       })
       .catch(error => {
