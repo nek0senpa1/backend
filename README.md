@@ -20,7 +20,6 @@ back end for safe space group app
 | '/deletemessage/:id' | Deletes the message with the ID number sent |
 | '/updatemessage/:id' | Updates the message with the ID number sent, and new body object with message |
 
-'/updatemessage/:id'
 
 # Generic Login info:
 
