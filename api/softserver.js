@@ -261,6 +261,26 @@ softserver.delete('/deletemessage/:id', authenticate, (rec,rez) => {
 })
 
 
+softserver.put('/updatemessage/:id', authenticate, (rec, rez) => {
+
+    let updoo = rec.params.id;
+
+    deebee('texts').where({id: updoo}).update(rec.body)
+    .then( count => {
+        if (count > 0) {
+            deebee('texts').where({id: rec.params.id})
+            .then( role => {
+              rez.status(201).json({message: 'success in updooting'})
+            })
+          } else { rez.status(404).json({message: 'failure, yo!'})}
+        })
+        .catch(err => {
+          rez.status(500).json(err)
+        })
+
+})
+
+
 
 module.exports = softserver;
 
