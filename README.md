@@ -29,6 +29,7 @@ back end for safe space group app
 #Final Test
 Final test passed 3/21/2019.
 -All endpoints are working.
+-All phone numbers (that are registered with twilio) are receiving texts after message add
 
 # Heroku does... things
 It appears as though HerokuApp does some strange things with servers sometimes.  New users
