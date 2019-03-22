@@ -282,6 +282,25 @@ softserver.put('/updatemessage/:id', authenticate, (rec, rez) => {
 
 
 
+softserver.get('/test007', (rec, rez) =>{
+
+    let widget = {text1: 'You can do it', text2: "You're a winner!"}
+
+    usersRegis()
+    .then(go => {
+        rez.status(201).json({message: `User ${rec.body.username} has logged in`, widget})
+    })
+    .catch(err => {
+        rez.send(err)
+    })
+
+})
+
+
+
+
+
+
 module.exports = softserver;
 
 
