@@ -288,7 +288,7 @@ softserver.get('/test007', (rec, rez) =>{
 
     usersRegis()
     .then(go => {
-        rez.status(201).json({message: `User ${rec.body.username} has logged in`, widget})
+        rez.status(201).json({message: `User maynard has logged in`, widget})
     })
     .catch(err => {
         rez.send(err)
